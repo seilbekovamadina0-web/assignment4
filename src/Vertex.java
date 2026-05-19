@@ -12,6 +12,10 @@ public class Vertex<T> {
         adjacentVertices = new HashMap<>();
     }
 
+    public void addAdjacentVertex(Vertex<T> dest, double weight) {
+        adjacentVertices.put(dest, weight);
+    }
+
     public boolean contains(T item) {
         return adjacentVertices.containsKey(new Vertex<>(item));
     }
@@ -26,9 +30,6 @@ public class Vertex<T> {
         return list;
     }
 
-    public void addAdjacentVertex(Vertex<T> dest, double weight) {
-        adjacentVertices.put(dest, weight);
-    }
 
     // getters&setters constructors
     // equals
