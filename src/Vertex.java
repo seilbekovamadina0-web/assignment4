@@ -26,6 +26,10 @@ public class Vertex<T> {
         return list;
     }
 
+    public void addAdjacentVertex(Vertex<T> dest, double weight) {
+        adjacentVertices.put(dest, weight);
+    }
+
     // getters&setters constructors
     // equals
 }

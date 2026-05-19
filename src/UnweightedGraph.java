@@ -30,10 +30,10 @@ public class UnweightedGraph<T> {
                 || source.equals(dest))
             return; // reject parallels & self-loops
 
-        map.get(source).add(dest);
+        map.get(source).addAdjacentVertex(new Vertex<>(dest), 1);
 
         if (undirected)
-            map.get(dest).add(source);
+            map.get(dest).addAdjacentVertex(new Vertex<>(source), 1);
     }
 
     public int getVerticesCount() {
@@ -43,7 +43,7 @@ public class UnweightedGraph<T> {
     public int getEdgesCount() {
         int count = 0;
         for (T v : map.keySet()) {
-            count += map.get(v).size();
+            count += map.get(v).adjacencyList().size();
         }
 
         if (undirected)
