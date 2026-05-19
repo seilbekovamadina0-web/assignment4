@@ -70,7 +70,7 @@ public class WeightedGraph<T> {
         return map.get(v).adjacencyList();
     }
 
-    public double get(T source, T dest) {
-        return map.get(source).get(dest);
+    public double getWeight(T source, T dest) {
+        return map.get(source).getWeight(dest);
     }
 }

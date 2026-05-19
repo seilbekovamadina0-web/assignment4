@@ -27,6 +27,18 @@ public class Vertex<T> {
         return list;
     }
 
+    public double getWeight(T item) {
+        return adjacentVertices.get(new Vertex<>(item));
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public Map<Vertex<T>, Double> getAdjacentVertices() {
+        return adjacentVertices;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if(this == obj) return true;
