@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Vertex<T> {
     private T data;
@@ -30,6 +27,21 @@ public class Vertex<T> {
         return list;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+
+        if(obj== null || getClass() != obj.getClass()) return false;
+
+        Vertex<?> vertex = (Vertex<?>) obj;
+
+        return Objects.equals(data, vertex.data);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(data);
+    }
 
     // getters&setters constructors
     // equals
