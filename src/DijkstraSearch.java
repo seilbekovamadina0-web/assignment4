@@ -1,11 +1,11 @@
 import java.util.*;
 
-public class DijkstraSearch<Vertex> extends Search<Vertex> {
-    private final Set<Vertex> unsettledNodes;
-    private final Map<Vertex, Double> distances;
-    private final WeightedGraph<Vertex> graph;
+public class DijkstraSearch<T> extends Search<T> {
+    private final Set<T> unsettledNodes;
+    private final Map<T, Double> distances;
+    private final WeightedGraph<T> graph;
 
-    public DijkstraSearch(WeightedGraph<Vertex> graph, Vertex source) {
+    public DijkstraSearch(WeightedGraph<T> graph, T source) {
         super(source);
         unsettledNodes = new HashSet<>();
         distances = new HashMap<>();
@@ -19,12 +19,12 @@ public class DijkstraSearch<Vertex> extends Search<Vertex> {
         unsettledNodes.add(source);
 
         while (!unsettledNodes.isEmpty()) {
-            Vertex currentNode = getVertexWithMinimumWeight(unsettledNodes);
+            T currentNode = getVertexWithMinimumWeight(unsettledNodes);
 
             marked.add(currentNode);
             unsettledNodes.remove(currentNode);
 
-            for (Vertex neighbor : graph.adjacencyList(currentNode)) {
+            for (T neighbor : graph.adjacencyList(currentNode)) {
                 double newDistance = getShortestDistance(currentNode) + getDistance(currentNode, neighbor);
 
                 if (getShortestDistance(neighbor) > newDistance) {
@@ -36,18 +36,13 @@ public class DijkstraSearch<Vertex> extends Search<Vertex> {
         }
     }
 
-    private double getDistance(Vertex node, Vertex target) {
-        for (Edge<Vertex> edge : graph.getEdges(node)) {
-            if (edge.getDest().equals(target))
-                return edge.getWeight();
-        }
-
-        throw new RuntimeException("Not found!");
+    private double getDistance(T node, T target) {
+        return graph.getWeight(node, target);
     }
 
-    private Vertex getVertexWithMinimumWeight(Set<Vertex> vertices) {
-        Vertex minimum = null;
-        for (Vertex vertex : vertices) {
+    private T getVertexWithMinimumWeight(Set<T> vertices) {
+        T minimum = null;
+        for (T vertex : vertices) {
             if (minimum == null) {
                 minimum = vertex;
 
@@ -61,7 +56,7 @@ public class DijkstraSearch<Vertex> extends Search<Vertex> {
         return minimum;
     }
 
-    private double getShortestDistance(Vertex destination) {
+    private double getShortestDistance(T destination) {
         Double d = distances.get(destination);
 
         return (d == null ? Double.MAX_VALUE : d);
